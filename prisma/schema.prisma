@@ -1,0 +1,35 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                Int      @id @default(autoincrement())
+  firstname         String
+  lastname          String
+  gender            Gender   @default(NA)
+  email             String   @unique
+  encryptedPassword String
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  birthdate         DateTime
+}
+
+model Task {
+  id         Int      @id @default(autoincrement())
+  content    String   @default("Hello world")
+  isComplete Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  userId     Int
+}
+
+enum Gender {
+  FEMALE
+  MALE
+  NA
+}
