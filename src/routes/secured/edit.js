@@ -8,28 +8,27 @@ import { hashPassword } from '../../utils/password'
 const api = Router()
 
 api.patch('/:id', async (req, res) => {
-    const id = parseInt(req.params.id)
-
-    const acceptedFields = ['pseudo', 'email', "password", "passwordConfirmation", "level", "notif"]
-
-    const missingValues = acceptedFields.filter(field => !req.body[field])
-    if (!isEmpty(missingValues)) {
-        return res.status(400).json({
-        error: `Values ${missingValues.join(', ')} are missing`
-        })
-    }
-
-    const { pseudo, email, password, passwordConfirmation, level, notif } = req.body
-
-    if (password !== passwordConfirmation) {
-        return res.status(400).json({
-          error: "Password and confirmation doesn't match"
-        })
-    }
-
-    const prisma = new PrismaClient()
-
     try {
+        const id = parseInt(req.params.id)
+
+        const acceptedFields = ['pseudo', 'email', "password", "passwordConfirmation", "level", "notif"]
+
+        const missingValues = acceptedFields.filter(field => !req.body[field])
+        if (!isEmpty(missingValues)) {
+            return res.status(400).json({
+            error: `Values ${missingValues.join(', ')} are missing`
+            })
+        }
+
+        const { pseudo, email, password, passwordConfirmation, level, notif } = req.body
+
+        if (password !== passwordConfirmation) {
+            return res.status(400).json({
+            error: "Password and confirmation doesn't match"
+            })
+        }
+
+        const prisma = new PrismaClient()
     
         const user = await prisma.user.findFirst({
             where: {

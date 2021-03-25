@@ -1,13 +1,11 @@
 import { Router } from 'express'
 import { PrismaClient } from '@prisma/client'
-import { isEmpty } from 'lodash'
 
 const api = Router()
 
-api.post('/', async (req, res) => {
+api.patch('/', async (req, res) => {
     try {
-
-        const acceptedFields = ['level', 'adress', "infos"]
+        const acceptedFields = ['spotId', 'authorId']
 
         const missingValues = acceptedFields.filter(field => !req.body[field])
         if (!isEmpty(missingValues)) {
@@ -16,19 +14,18 @@ api.post('/', async (req, res) => {
             })
         }
 
-        const { level, adress, infos } = req.body
+        const { spotId, authorId } = req.body
 
         const prisma = new PrismaClient()
-
-        const spot = await prisma.spot.create({
+    
+        const like = await prisma.like.create({
             data: {
-                level,
-                adress,
-                infos
+                spotId,
+                authorId
             }
         })
 
-        res.json({ data: { spot } })
+        res.json({ data: { like } })
     } catch (err) {
         res.status(400).json({ error: err.message })
     }

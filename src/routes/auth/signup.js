@@ -8,26 +8,26 @@ import { hashPassword } from '../../utils/password'
 const api = Router()
 
 api.post('/', async (req, res) => {
-
-  const acceptedFields = ['pseudo', 'email', 'level', 'password', 'passwordConfirmation']
-
-  const missingValues = acceptedFields.filter(field => !req.body[field])
-  if (!isEmpty(missingValues)) {
-    return res.status(400).json({
-      error: `Values ${missingValues.join(', ')} are missing`
-    })
-  }
-
-  const { pseudo, email, level, password, passwordConfirmation } = req.body
-
-  if (password !== passwordConfirmation) {
-    return res.status(400).json({
-      error: "Password and confirmation doesn't match"
-    })
-  }
-
-  const prisma = new PrismaClient()
   try {
+
+    const acceptedFields = ['pseudo', 'email', 'level', 'password', 'passwordConfirmation']
+
+    const missingValues = acceptedFields.filter(field => !req.body[field])
+    if (!isEmpty(missingValues)) {
+      return res.status(400).json({
+        error: `Values ${missingValues.join(', ')} are missing`
+      })
+    }
+
+    const { pseudo, email, level, password, passwordConfirmation } = req.body
+
+    if (password !== passwordConfirmation) {
+      return res.status(400).json({
+        error: "Password and confirmation doesn't match"
+      })
+    }
+
+    const prisma = new PrismaClient()
     const user = await prisma.user.create({
       data: {
         pseudo,

@@ -7,6 +7,7 @@ import { hashPassword } from '../../utils/password'
 const api = Router()
 
 api.post('/', async (req, res) => {
+  try {
     const { email } = req.body
   
     const prisma = new PrismaClient()
@@ -29,6 +30,9 @@ api.post('/', async (req, res) => {
   
     await sendMail({ to: email, subject: 'Forgot password', text: `Your new password is ${newPassword}`, html: `<strong>Your new password is ${newPassword}` })
     res.json({ data: { message: 'Email successfully sent' } })
-  })
+  } catch (err) {
+    res.status(400).json({ error: err.message })
+  }
+})
   
   export default api
