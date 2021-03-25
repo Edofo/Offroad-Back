@@ -3,20 +3,27 @@ import { PrismaClient } from '@prisma/client'
 
 const api = Router()
 
-api.delete('/:id', async (req, res) => {
+api.patch('/:id', async (req, res) => {
     try {
-
         const id = parseInt(req.params.id, 10)
 
         const prisma = new PrismaClient()
-
-        const like = await prisma.like.delete({
+        const like = await prisma.like.findFirst({
             where: {
                 id
             }
         })
 
-        res.json({ data: { like } })
+        const updateTasks = await prisma.task.update({
+            where: {
+                id
+            },
+            data: {
+                isComplete: task.isComplete ? false : true,
+            }
+        })
+
+        res.json({ data: { updateTasks } })
     } catch (err) {
         res.status(400).json({ error: err.message })
     }

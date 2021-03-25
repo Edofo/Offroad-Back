@@ -3,16 +3,15 @@ import { PrismaClient } from '@prisma/client'
 
 const api = Router()
 
-api.delete('/:id', async (req, res) => {
+api.get('/:id', async (req, res) => {
+    const spotId = parseInt(req.params.id)
+
+    const prisma = new PrismaClient()
+
     try {
-
-        const id = parseInt(req.params.id)
-
-        const prisma = new PrismaClient()
-    
-        const post = await prisma.post.delete({
+        const post = await prisma.post.findMany({
             where: {
-                id,
+                spotId
             }
         })
 
