@@ -13,8 +13,8 @@ api.post('/', (req, res) => {
         return res.status(400).json({ error: err })
       }
   
-      const { email, id } = user
-      const payload = { email, id }
+      const { pseudo, email, id, level } = user
+      const payload = { pseudo, email, id, level }
       dotenv.config()
       const token = jwt.sign(payload, process.env.JWT_ENCRYPTION)
       res.json({ data: { user, token } })
