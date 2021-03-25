@@ -16,9 +16,6 @@ model User {
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
   notif				      Notif    @default(NO)
-  posts             Post[]
-  reports           Report[]
-  likes             Like[]
 }
 
 model Spot {
@@ -28,42 +25,25 @@ model Spot {
   infos		   String
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
-  posts      Post[]
-  reports    Report[]
-  likes      Like[]
 }
 
-model Post {
+model Commentaire {
   id         Int      @id @default(autoincrement())
   content	   String
   note		   String
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
-  spot       Spot?    @relation(fields: [spotId], references: [id])
-  spotId     Int?
-  author     User?    @relation(fields: [authorId], references: [id])
-  authorId   Int?
+  spotId	   Int
+  userId	   Int
 }
 
-model Report {
+model Signal {
   id         Int      @id @default(autoincrement())
   content	   String
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
-  spot       Spot?    @relation(fields: [spotId], references: [id])
-  spotId     Int?
-  author     User?    @relation(fields: [authorId], references: [id])
-  authorId   Int?
-}
-
-model Like {
-  id         Int      @id @default(autoincrement()) 
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  spot       Spot?    @relation(fields: [spotId], references: [id])
-  spotId     Int?
-  author     User?    @relation(fields: [authorId], references: [id])
-  authorId   Int?
+  spotId	   Int
+  userId	   Int
 }
 
 enum Level {
