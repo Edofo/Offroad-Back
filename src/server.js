@@ -5,7 +5,7 @@ import cors from 'cors'
 
 import checkEnv from './utils/checkEnv'
 import mlog from './utils/mlog'
-import routes from './routes'
+import routes from './routes/router'
 import './middlewares/passport'
 
 import passport from 'passport'
