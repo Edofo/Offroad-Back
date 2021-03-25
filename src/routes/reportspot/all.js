@@ -9,7 +9,7 @@ api.get('/:id', async (req, res) => {
     const prisma = new PrismaClient()
 
     try {
-        const report = await prisma.report.findFirst({
+        const report = await prisma.report.findMany({
             where: {
                 spotId
             }
