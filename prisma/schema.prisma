@@ -9,27 +9,71 @@ datasource db {
 
 model User {
   id                Int      @id @default(autoincrement())
-  firstname         String
-  lastname          String
-  gender            Gender   @default(NA)
+  pseudo         	  String
   email             String   @unique
   encryptedPassword String
+  level            	Level    @default(DEBUTANT)
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
-  birthdate         DateTime
+  notif				      Notif    @default(NO)
+  posts             Post[]
+  reports           Report[]
+  likes             Like[]
 }
 
-model Task {
+model Spot {
   id         Int      @id @default(autoincrement())
-  content    String   @default("Hello world")
-  isComplete Boolean  @default(false)
+  level	     Level	  @default(DEBUTANT)
+  adress	   String
+  infos		   String
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
-  userId     Int
+  posts      Post[]
+  reports    Report[]
+  likes      Like[]
 }
 
-enum Gender {
-  FEMALE
-  MALE
-  NA
+model Post {
+  id         Int      @id @default(autoincrement())
+  content	   String
+  note		   String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  spot       Spot?    @relation(fields: [spotId], references: [id])
+  spotId     Int?
+  author     User?    @relation(fields: [authorId], references: [id])
+  authorId   Int?
+}
+
+model Report {
+  id         Int      @id @default(autoincrement())
+  content	   String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  spot       Spot?    @relation(fields: [spotId], references: [id])
+  spotId     Int?
+  author     User?    @relation(fields: [authorId], references: [id])
+  authorId   Int?
+}
+
+model Like {
+  id         Int      @id @default(autoincrement()) 
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  spot       Spot?    @relation(fields: [spotId], references: [id])
+  spotId     Int?
+  author     User?    @relation(fields: [authorId], references: [id])
+  authorId   Int?
+}
+
+enum Level {
+  DEBUTANT
+  AMATEUR
+  EXPERT
+  PRO
+}
+
+enum Notif {
+  YES
+  NO
 }
