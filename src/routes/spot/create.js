@@ -2,9 +2,9 @@ import { Router } from 'express'
 import { PrismaClient } from '@prisma/client'
 import { isEmpty } from 'lodash'
 
-const create = Router()
+const api = Router()
 
-create.post('/', async (req, res) => {
+api.post('/', async (req, res) => {
     const acceptedFields = ['level', 'adress', "infos"]
 
     const missingValues = acceptedFields.filter(field => !req.body[field])
@@ -34,4 +34,4 @@ create.post('/', async (req, res) => {
     }
 })
 
-export default create
+export default api
