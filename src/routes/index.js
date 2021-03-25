@@ -11,7 +11,6 @@ api.get('/', (_req, res) => {
 })
 
 api.use('/auth', auth)
-api.use('/task', task)
 api.use('/', passport.authenticate('jwt', { session: false }), secured)
 
 export default api
