@@ -5,20 +5,20 @@ import { isEmpty } from 'lodash'
 const api = Router()
 
 api.post('/', async (req, res) => {
-    const acceptedFields = ['content', 'note', 'spotId', 'authorId']
-
-    const missingValues = acceptedFields.filter(field => !req.body[field])
-    if (!isEmpty(missingValues)) {
-        return res.status(400).json({
-        error: `Values ${missingValues.join(', ')} are missing`
-        })
-    }
-
-    const { content, note, spotId, authorId } = req.body
-
-    const prisma = new PrismaClient()
-
     try {
+
+        const acceptedFields = ['content', 'note', 'spotId', 'authorId']
+
+        const missingValues = acceptedFields.filter(field => !req.body[field])
+        if (!isEmpty(missingValues)) {
+            return res.status(400).json({
+            error: `Values ${missingValues.join(', ')} are missing`
+            })
+        }
+
+        const { content, note, spotId, authorId } = req.body
+
+        const prisma = new PrismaClient()
     
         const post = await prisma.post.create({
             data: {

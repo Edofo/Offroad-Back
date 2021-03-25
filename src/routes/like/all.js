@@ -4,11 +4,11 @@ import { PrismaClient } from '@prisma/client'
 const api = Router()
 
 api.get('/:id', async (req, res) => {
-    const authorId = parseInt(req.params.id)
-
-    const prisma = new PrismaClient()
-
     try {
+        const authorId = parseInt(req.params.id)
+
+        const prisma = new PrismaClient()
+
         const like = await prisma.like.findMany({
             where: {
                 authorId

@@ -3,27 +3,29 @@ import { PrismaClient } from '@prisma/client'
 
 const api = Router()
 
-api.patch('/:id', async (req, res) => {
+api.patch('/', async (req, res) => {
     try {
-        const id = parseInt(req.params.id, 10)
+        const acceptedFields = ['spotId', 'authorId']
+
+        const missingValues = acceptedFields.filter(field => !req.body[field])
+        if (!isEmpty(missingValues)) {
+            return res.status(400).json({
+            error: `Values ${missingValues.join(', ')} are missing`
+            })
+        }
+
+        const { spotId, authorId } = req.body
 
         const prisma = new PrismaClient()
-        const like = await prisma.like.findFirst({
-            where: {
-                id
-            }
-        })
-
-        const updateTasks = await prisma.task.update({
-            where: {
-                id
-            },
+    
+        const like = await prisma.like.create({
             data: {
-                isComplete: task.isComplete ? false : true,
+                spotId,
+                authorId
             }
         })
 
-        res.json({ data: { updateTasks } })
+        res.json({ data: { like } })
     } catch (err) {
         res.status(400).json({ error: err.message })
     }
