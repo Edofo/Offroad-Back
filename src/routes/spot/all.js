@@ -2,9 +2,9 @@ import { Router } from 'express'
 import { PrismaClient } from '@prisma/client'
 import { isEmpty } from 'lodash'
 
-const all = Router()
+const api = Router()
 
-all.get('/', async (req, res) => {
+api.get('/', async (req, res) => {
 
   const acceptedFields = ['level']
 
@@ -31,4 +31,4 @@ all.get('/', async (req, res) => {
   }
 })
 
-export default all
+export default api
