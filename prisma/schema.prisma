@@ -9,41 +9,61 @@ datasource db {
 
 model User {
   id                Int      @id @default(autoincrement())
-  pseudo         	  String
+  pseudo            String
   email             String   @unique
   encryptedPassword String
-  level            	Level    @default(DEBUTANT)
+  level             Level    @default(DEBUTANT)
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
-  notif				      Notif    @default(NO)
+  notif             Notif    @default(NO)
+  posts             Post[]
+  reports           Report[]
+  likes             Like[]
 }
 
 model Spot {
   id         Int      @id @default(autoincrement())
-  level	     Level	  @default(DEBUTANT)
-  adress	   String
-  infos		   String
+  level      Level	  @default(DEBUTANT)
+  adress     String
+  infos      String
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
+  posts      Post[]
+  reports    Report[]
+  likes      Like[]
 }
 
-model Commentaire {
+model Post {
   id         Int      @id @default(autoincrement())
-  content	   String
-  note		   String
+  content    String
+  note       String
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
-  spotId	   Int
-  userId	   Int
+  spot       Spot?    @relation(fields: [spotId], references: [id])
+  spotId     Int?
+  author     User?    @relation(fields: [authorId], references: [id])
+  authorId   Int?
 }
 
-model Signal {
+model Report {
   id         Int      @id @default(autoincrement())
-  content	   String
+  content    String
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
-  spotId	   Int
-  userId	   Int
+  spot       Spot?    @relation(fields: [spotId], references: [id])
+  spotId     Int?
+  author     User?    @relation(fields: [authorId], references: [id])
+  authorId   Int?
+}
+
+model Like {
+  id         Int      @id @default(autoincrement()) 
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  spot       Spot?    @relation(fields: [spotId], references: [id])
+  spotId     Int?
+  author     User?    @relation(fields: [authorId], references: [id])
+  authorId   Int?
 }
 
 enum Level {
