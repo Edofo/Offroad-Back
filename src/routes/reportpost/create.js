@@ -4,12 +4,9 @@ import { isEmpty } from 'lodash'
 
 const api = Router()
 
-api.patch('/:id', async (req, res) => {
+api.post('/', async (req, res) => {
     try {
-
-        const id = parseInt(req.params.id)
-
-        const acceptedFields = ['content', 'spotId', "authorId"]
+        const acceptedFields = ['content', 'postId', "authorId"]
 
         const missingValues = acceptedFields.filter(field => !req.body[field])
         if (!isEmpty(missingValues)) {
@@ -18,28 +15,19 @@ api.patch('/:id', async (req, res) => {
             })
         }
 
-        const { content, spotId, authorId } = req.body
+        const { content, postId, authorId } = req.body
 
-        const prisma = new PrismaClient()
+        const prisma = new PrismaClient()    
     
-        const reportspot = await prisma.reportspot.findFirst({
-            where: {
-                id
-            }
-        })
-
-        const updateReport = await prisma.reportspot.update({
-            where: {
-                id
-            },
+        const reportpost = await prisma.reportpost.create({
             data: {
                 content,
-                spotId,
+                postId,
                 authorId
             }
         })
 
-        res.json({ data: { reportspot, updateReport } })
+        res.json({ data: { reportpost } })
     } catch (err) {
         res.status(400).json({ error: err.message })
     }

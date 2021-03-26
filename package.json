@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "A simple server",
   "main": "src/server.js",
-  "author": "Nolan / Matthieu",
+  "author": "Nolan / Ponch / Seb / Matthieu",
   "license": "ISC",
   "scripts": {
     "dev": "npx nodemon src/server",
@@ -16,7 +16,6 @@
   ],
   "dependencies": {
     "@prisma/client": "^2.18.0",
-    "babel-cli": "^6.26.0",
     "bcryptjs": "^2.4.3",
     "chalk": "^3.0.0",
     "cors": "^2.8.5",
@@ -25,14 +24,12 @@
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.21",
     "mailgun-js": "^0.22.0",
-    "nodemailer": "^6.5.0",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
     "randomstring": "^1.1.5"
   },
   "devDependencies": {
-    "@babel/cli": "^7.13.10",
     "@babel/core": "^7.13.10",
     "@babel/node": "^7.13.0",
     "@babel/preset-env": "^7.13.9",

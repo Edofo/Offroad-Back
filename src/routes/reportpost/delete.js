@@ -3,20 +3,20 @@ import { PrismaClient } from '@prisma/client'
 
 const api = Router()
 
-api.get('/:id', async (req, res) => {
+api.delete('/:id', async (req, res) => {
     try {
 
-        const spotId = parseInt(req.params.id)
+        const id = parseInt(req.params.id)
 
         const prisma = new PrismaClient()
-
-        const reportspot = await prisma.reportspot.findMany({
+    
+        const reportpost = await prisma.reportpost.delete({
             where: {
-                spotId
+                id,
             }
         })
 
-        res.json({ data: { reportspot } })
+        res.json({ data: { reportpost } })
     } catch (err) {
         res.status(400).json({ error: err.message })
     }

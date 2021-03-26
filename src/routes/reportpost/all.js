@@ -10,13 +10,13 @@ api.get('/:id', async (req, res) => {
 
         const prisma = new PrismaClient()
 
-        const reportspot = await prisma.reportspot.findMany({
+        const reportpost = await prisma.reportpost.findMany({
             where: {
-                spotId
+                postId
             }
         })
 
-        res.json({ data: { reportspot } })
+        res.json({ data: { reportpost } })
     } catch (err) {
         res.status(400).json({ error: err.message })
     }

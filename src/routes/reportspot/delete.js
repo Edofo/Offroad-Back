@@ -10,13 +10,13 @@ api.delete('/:id', async (req, res) => {
 
         const prisma = new PrismaClient()
     
-        const report = await prisma.report.delete({
+        const reportspot = await prisma.reportspot.delete({
             where: {
                 id,
             }
         })
 
-        res.json({ data: { report } })
+        res.json({ data: { reportspot } })
     } catch (err) {
         res.status(400).json({ error: err.message })
     }

@@ -17,7 +17,8 @@ model User {
   updatedAt         DateTime @updatedAt
   notif             Notif    @default(NO)
   posts             Post[]
-  reports           Report[]
+  rSpot             ReportSpot[]
+  rPost             ReportPost[]
   likes             Like[]
 }
 
@@ -29,7 +30,7 @@ model Spot {
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
   posts      Post[]
-  reports    Report[]
+  rSpot      ReportSpot[]
   likes      Like[]
 }
 
@@ -43,15 +44,27 @@ model Post {
   spotId     Int?
   author     User?    @relation(fields: [authorId], references: [id])
   authorId   Int?
+  rPosts     ReportPost[]
 }
 
-model Report {
+model ReportSpot {
   id         Int      @id @default(autoincrement())
   content    String
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
   spot       Spot?    @relation(fields: [spotId], references: [id])
   spotId     Int?
+  author     User?    @relation(fields: [authorId], references: [id])
+  authorId   Int?
+}
+
+model ReportPost {
+  id         Int      @id @default(autoincrement())
+  content    String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  post       Post?    @relation(fields: [postId], references: [id])
+  postId     Int?
   author     User?    @relation(fields: [authorId], references: [id])
   authorId   Int?
 }

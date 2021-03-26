@@ -9,7 +9,7 @@ api.patch('/:id', async (req, res) => {
 
         const id = parseInt(req.params.id)
 
-        const acceptedFields = ['content', 'spotId', "authorId"]
+        const acceptedFields = ['content', 'postId', "authorId"]
 
         const missingValues = acceptedFields.filter(field => !req.body[field])
         if (!isEmpty(missingValues)) {
@@ -18,28 +18,28 @@ api.patch('/:id', async (req, res) => {
             })
         }
 
-        const { content, spotId, authorId } = req.body
+        const { content, postId, authorId } = req.body
 
         const prisma = new PrismaClient()
     
-        const reportspot = await prisma.reportspot.findFirst({
+        const reportpost = await prisma.reportpost.findFirst({
             where: {
                 id
             }
         })
 
-        const updateReport = await prisma.reportspot.update({
+        const updateReport = await prisma.reportpost.update({
             where: {
                 id
             },
             data: {
                 content,
-                spotId,
+                postId,
                 authorId
             }
         })
 
-        res.json({ data: { reportspot, updateReport } })
+        res.json({ data: { reportpost, updateReport } })
     } catch (err) {
         res.status(400).json({ error: err.message })
     }
