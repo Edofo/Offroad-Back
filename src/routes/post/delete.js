@@ -9,6 +9,16 @@ api.delete('/:id', async (req, res) => {
         const id = parseInt(req.params.id)
 
         const prisma = new PrismaClient()
+
+        const postCheck = await prisma.like.findFirst({
+            where: {
+                id
+            }
+        })
+
+        if (!postCheck) {
+            return res.status(400).json({ error: `this like with id: ${id} doesn't exist` })
+        }
     
         const post = await prisma.post.delete({
             where: {
