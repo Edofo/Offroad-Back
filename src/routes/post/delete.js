@@ -10,6 +10,16 @@ api.delete('/:id', async (req, res) => {
 
         const prisma = new PrismaClient()
 
+        const postCheck = await prisma.post.findFirst({
+            where: {
+                id
+            }
+        })
+
+        if (!postCheck) {
+            return res.status(400).json({ error: `this post with id: ${id} doesn't exist` })
+        }
+
         const postCheck = await prisma.like.findFirst({
             where: {
                 id

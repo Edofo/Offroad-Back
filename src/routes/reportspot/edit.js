@@ -22,13 +22,13 @@ api.patch('/:id', async (req, res) => {
 
         const prisma = new PrismaClient()
     
-        const report = await prisma.report.findFirst({
+        const reportspot = await prisma.reportspot.findFirst({
             where: {
                 id
             }
         })
 
-        const updateReport = await prisma.report.update({
+        const updateReport = await prisma.reportspot.update({
             where: {
                 id
             },
@@ -39,7 +39,7 @@ api.patch('/:id', async (req, res) => {
             }
         })
 
-        res.json({ data: { report, updateReport } })
+        res.json({ data: { reportspot, updateReport } })
     } catch (err) {
         res.status(400).json({ error: err.message })
     }

@@ -19,7 +19,7 @@ api.post('/', async (req, res) => {
 
         const prisma = new PrismaClient()    
     
-        const report = await prisma.report.create({
+        const reportspot = await prisma.reportspot.create({
             data: {
                 content,
                 spotId,
@@ -27,7 +27,7 @@ api.post('/', async (req, res) => {
             }
         })
 
-        res.json({ data: { report } })
+        res.json({ data: { reportspot } })
     } catch (err) {
         res.status(400).json({ error: err.message })
     }
