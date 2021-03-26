@@ -2,6 +2,7 @@ import { Router } from 'express'
 import auth from './auth/router'
 import spot from './spot/router'
 import post from './post/router'
+import like from './like/router'
 import reportspot from './reportspot/router'
 import secured from './secured/router'
 import passport from 'passport'
@@ -16,6 +17,7 @@ router.use('/auth', auth)
 
 router.use('/spot', spot)
 router.use('/post', post)
+router.use('/like', like)
 
 router.use('/reportspot', reportspot)
 

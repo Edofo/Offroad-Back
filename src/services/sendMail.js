@@ -1,26 +1,17 @@
-import nodemailer from "nodemailer"
+import mailgun from 'mailgun-js'
 
-export default async function sendMail({ from = process.env.MAILER_FROM, to, subject, text, html }) {
+export default async function sendMail({ from = process.env.MAILER_FROM, to, subject, text }) {
   
-  let testAccount = await nodemailer.createTestAccount();
+  let mg = mailgun({apiKey: process.env.API_KEY, domain: process.env.DOMAIN});
 
-  
-  let transporter = nodemailer.createTransport({
-    service: 'gmail',
-    host: process.env.MAILER_HOST,
-    port: process.env.MAILER_PORT,
-    secure: true,
-    auth: {
-      user: process.env.MAILER_USER, // generated ethereal user
-      pass: process.env.MAILER_PASSWORD, // generated ethereal password
-    },
-  });
-
-  await transporter.sendMail({
+  let data = {
     from,
     to,
     subject,
     text,
-    html,
-  });
+  };
+
+  mg.messages().send(data, function (error, body) {
+    console.log(body);
+  })
 }

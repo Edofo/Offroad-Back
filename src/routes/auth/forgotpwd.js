@@ -28,7 +28,7 @@ api.post('/', async (req, res) => {
       }
     })
   
-    await sendMail({ to: email, subject: 'Forgot password', text: `Your new password is ${newPassword}`, html: `<strong>Your new password is ${newPassword}` })
+    await sendMail({ to: email, subject: 'Forgot password', text: `Your new password is ${newPassword}` })
     res.json({ data: { message: 'Email successfully sent' } })
   } catch (err) {
     res.status(400).json({ error: err.message })
