@@ -1,9 +1,10 @@
 import { Router } from 'express'
 import { PrismaClient } from '@prisma/client'
+import { isEmpty } from 'lodash'
 
 const api = Router()
 
-api.patch('/', async (req, res) => {
+api.post('/', async (req, res) => {
     try {
         const acceptedFields = ['spotId', 'authorId']
 
