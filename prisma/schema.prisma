@@ -15,11 +15,17 @@ model User {
   level             Level    @default(DEBUTANT)
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
-  notif             Notif    @default(NO)
+  notif             Boolean  @default(false)
+  sang              String   
+  allergie          String   
+  medicament        String
+  other             String
   posts             Post[]
   rSpot             ReportSpot[]
   rPost             ReportPost[]
   likes             Like[]
+  randos            Rando[]
+  historys          Historique[]
 }
 
 model Spot {
@@ -32,6 +38,8 @@ model Spot {
   posts      Post[]
   rSpot      ReportSpot[]
   likes      Like[]
+  randos     Rando[]
+  historys   Historique[]
 }
 
 model Post {
@@ -79,14 +87,37 @@ model Like {
   authorId   Int?
 }
 
-enum Level {
-  DEBUTANT
-  AMATEUR
-  EXPERT
-  PRO
+model Rando {
+  id         Int      @id @default(autoincrement()) 
+  alarm      Boolean  @default(true)
+  average    String
+  longueur   String
+  max        String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  spot       Spot?    @relation(fields: [spotId], references: [id])
+  spotId     Int?
+  author     User?    @relation(fields: [authorId], references: [id])
+  authorId   Int?
 }
 
-enum Notif {
-  YES
-  NO
+model Historique {
+  id         Int      @id @default(autoincrement()) 
+  average    String
+  time       String
+  longueur   String
+  max        String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  spot       Spot?    @relation(fields: [spotId], references: [id])
+  spotId     Int?
+  author     User?    @relation(fields: [authorId], references: [id])
+  authorId   Int?
+}
+
+enum Level {
+  DEBUTANT
+  INTERMEDIAIRE
+  AVANCE
+  EXPERT
 }
