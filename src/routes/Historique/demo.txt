@@ -53,6 +53,8 @@
 # Longueur
 #
 # https://www.youtube.com/watch?v=H8aJJ_NQ7Jk
+#
+# https://github.com/manuelbieh/geolib
 ## 
 
     ETAPE 1.
