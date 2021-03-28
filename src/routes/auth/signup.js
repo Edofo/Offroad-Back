@@ -34,6 +34,10 @@ api.post('/', async (req, res) => {
         email,
         level,
         encryptedPassword: hashPassword(password),
+        sang: '',
+        allergie: '',
+        medicament: '',
+        other: ''
       }
     })
 

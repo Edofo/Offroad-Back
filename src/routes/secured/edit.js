@@ -11,7 +11,7 @@ api.patch('/:id', async (req, res) => {
     try {
         const id = parseInt(req.params.id)
 
-        const acceptedFields = ['pseudo', 'email', "password", "passwordConfirmation", "level", "notif"]
+        const acceptedFields = ['pseudo', 'email', "password", "passwordConfirmation", "level", "notif", "sang", "allergie", "medicament", "other"]
 
         const missingValues = acceptedFields.filter(field => !req.body[field])
         if (!isEmpty(missingValues)) {
@@ -20,7 +20,7 @@ api.patch('/:id', async (req, res) => {
             })
         }
 
-        const { pseudo, email, password, passwordConfirmation, level, notif } = req.body
+        const { pseudo, email, password, passwordConfirmation, level, notif, sang, allergie, medicament, other } = req.body
 
         if (password !== passwordConfirmation) {
             return res.status(400).json({
@@ -45,7 +45,11 @@ api.patch('/:id', async (req, res) => {
                 email,
                 level,
                 encryptedPassword: hashPassword(password),
-                notif
+                notif,
+                sang,
+                allergie,
+                medicament,
+                other
             }
         })
 

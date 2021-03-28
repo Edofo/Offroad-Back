@@ -1,0 +1,81 @@
+##
+# Vitesse Moyenne
+## 
+
+    ETAPE 1.
+
+        Récupération de :
+        --> Distance
+        --> Temps
+    
+    ETAPE 2.
+
+        Calculer :
+        function vMoyenne(distance, time) {
+            const a = distance / time;
+            const b = Math.floor(a * 3.6);
+            return b + 'km/h'
+        }
+
+    ETAPE 3.
+
+        Récupération du résultat
+    
+********************************************************
+
+##
+# Temps
+## 
+
+    ETAPE 1.
+
+        Récupération du temps
+    
+    ETAPE 2.
+
+        Calculer :
+            function dateHMS(time) {
+                const addZero = function(v) { return v<10 ? '0' + v : v; };
+                const d = new Date(time * 1000); // js fonctionne en milisecondes
+                const t = [];
+                t.push(addZero(d.getHours())+ 'h');
+                t.push(addZero(d.getMinutes())+ 'm');
+                return t.join(' ');
+            }
+
+    ETAPE 3.
+
+        Récupération du résultat
+
+********************************************************
+
+##
+# Longueur
+#
+# https://www.youtube.com/watch?v=H8aJJ_NQ7Jk
+#
+# https://github.com/manuelbieh/geolib
+## 
+
+    ETAPE 1.
+
+        Récupération des 2 coordonnées :
+        --> DEBUT DU PARCOURS
+        --> FIN DU PARCOURS
+    
+    ETAPE 2.
+
+        Calculer :
+            function(coord1, coord2) {
+                const distance = getDistance(
+                    {coord1}
+                    {coord2}
+                )
+                return distance
+            }
+
+    ETAPE 3.
+
+        Récupération du résultat
+
+********************************************************
