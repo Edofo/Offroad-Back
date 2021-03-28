@@ -48,3 +48,32 @@
         Récupération du résultat
 
 ********************************************************
+
+##
+# Longueur
+#
+# https://www.youtube.com/watch?v=H8aJJ_NQ7Jk
+## 
+
+    ETAPE 1.
+
+        Récupération des 2 coordonnées :
+        --> DEBUT DU PARCOURS
+        --> FIN DU PARCOURS
+    
+    ETAPE 2.
+
+        Calculer :
+            function(coord1, coord2) {
+                const distance = getDistance(
+                    {coord1}
+                    {coord2}
+                )
+                return distance
+            }
+
+    ETAPE 3.
+
+        Récupération du résultat
+
+********************************************************
