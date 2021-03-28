@@ -90,9 +90,6 @@ model Like {
 model Rando {
   id         Int      @id @default(autoincrement()) 
   alarm      Boolean  @default(true)
-  average    String
-  longueur   String
-  max        String
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
   spot       Spot?    @relation(fields: [spotId], references: [id])
@@ -103,7 +100,6 @@ model Rando {
 
 model Historique {
   id         Int      @id @default(autoincrement()) 
-  average    String
   time       String
   longueur   String
   max        String
