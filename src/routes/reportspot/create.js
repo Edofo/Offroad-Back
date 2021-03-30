@@ -19,11 +19,11 @@ api.post('/', async (req, res) => {
 
         const prisma = new PrismaClient()    
     
-        const reportspot = await prisma.reportspot.create({
+        const reportspot = await prisma.reportSpot.create({
             data: {
                 content,
-                spotId,
-                authorId
+                spotId: spotId,
+                authorId: authorId
             }
         })
 

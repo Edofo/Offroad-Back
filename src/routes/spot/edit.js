@@ -28,6 +28,10 @@ api.patch('/:id', async (req, res) => {
             }
         })
 
+        if (!spot) {
+            return res.status(400).json({ error: `this report with id: ${id} doesn't exist` })
+        }
+
         const updateSpot = await prisma.spot.update({
             where: {
                 id

@@ -10,7 +10,7 @@ api.delete('/:id', async (req, res) => {
 
         const prisma = new PrismaClient()
     
-        const reportpost = await prisma.reportpost.delete({
+        const reportpost = await prisma.reportPost.delete({
             where: {
                 id,
             }
