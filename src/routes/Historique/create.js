@@ -29,7 +29,7 @@ api.post('/', async (req, res) => {
             return t.join(' ');
         }
 
-        const vMoyen = await Math.floor((distance / temps) * 3.6) + ' km/h';
+        const vMoyen = await Math.floor((distance / temps) * 3.6) + ' km';
         const time = await dateHMS(temps)
         const longueur = await distance + ' km/h';
         const max = await Math.floor(convertSpeed(speed, 'kmh')) + ' km/h';
