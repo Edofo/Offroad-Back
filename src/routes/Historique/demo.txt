@@ -64,12 +64,16 @@
     ETAPE 2.
 
         Calculer :
-            function(coord1, coord2) {
-                const distance = getPreciseDistance(
-                    {coord1}
-                    {coord2}
-                )
-                return distance
+            const longuer = 0;
+
+            for(i = 0; i < temps; i++) {
+                function(coord, coord2) {
+                    const distance = getPreciseDistance(
+                        {coord1}
+                        {coord2}
+                    )
+                    return longuer + distance
+                }
             }
 
     ETAPE 3.
