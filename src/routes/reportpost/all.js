@@ -6,13 +6,13 @@ const api = Router()
 api.get('/:id', async (req, res) => {
     try {
 
-        const spotId = parseInt(req.params.id)
+        const id = parseInt(req.params.id)
 
         const prisma = new PrismaClient()
 
-        const reportpost = await prisma.reportpost.findMany({
+        const reportpost = await prisma.reportPost.findMany({
             where: {
-                postId
+                id
             }
         })
 

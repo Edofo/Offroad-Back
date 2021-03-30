@@ -22,20 +22,20 @@ api.patch('/:id', async (req, res) => {
 
         const prisma = new PrismaClient()
     
-        const reportpost = await prisma.reportpost.findFirst({
+        const reportpost = await prisma.reportPost.findFirst({
             where: {
                 id
             }
         })
 
-        const updateReport = await prisma.reportpost.update({
+        const updateReport = await prisma.reportPost.update({
             where: {
                 id
             },
             data: {
                 content,
-                postId,
-                authorId
+                postId: postId,
+                authorId: authorId
             }
         })
 

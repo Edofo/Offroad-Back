@@ -3,6 +3,7 @@ import auth from './auth/router'
 import spot from './spot/router'
 import post from './post/router'
 import like from './like/router'
+import historique from './historique/router'
 import reportpost from './reportpost/router'
 import reportspot from './reportspot/router'
 import secured from './secured/router'
@@ -17,9 +18,10 @@ router.get('/', (_req, res) => {
 router.use('/auth', auth)
 
 router.use('/spot', spot)
-router.use('/post', post)
 
+router.use('/post', post)
 router.use('/like', like)
+router.use('/historique', historique)
 
 router.use('/reportpost', reportpost)
 router.use('/reportspot', reportspot)

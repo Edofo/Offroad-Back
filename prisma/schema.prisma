@@ -25,21 +25,21 @@ model User {
   rPost             ReportPost[]
   likes             Like[]
   randos            Rando[]
-  historys          Historique[]
+  historiques       Historique[]
 }
 
 model Spot {
-  id         Int      @id @default(autoincrement())
-  level      Level	  @default(DEBUTANT)
-  adress     String   @unique
-  infos      String
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  posts      Post[]
-  rSpot      ReportSpot[]
-  likes      Like[]
-  randos     Rando[]
-  historys   Historique[]
+  id          Int      @id @default(autoincrement())
+  level       Level	   @default(DEBUTANT)
+  adress      String   @unique
+  infos       String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  posts       Post[]
+  rSpot       ReportSpot[]
+  likes       Like[]
+  randos      Rando[]
+  historiques Historique[]
 }
 
 model Post {
@@ -100,6 +100,7 @@ model Rando {
 
 model Historique {
   id         Int      @id @default(autoincrement()) 
+  vMoyen     String  
   time       String
   longueur   String
   max        String

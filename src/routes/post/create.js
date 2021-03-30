@@ -24,8 +24,8 @@ api.post('/', async (req, res) => {
             data: {
                 content,
                 note,
-                spotId,
-                authorId
+                spotId: spotId,
+                authorId: authorId
             }
         })
 

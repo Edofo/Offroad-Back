@@ -1,5 +1,5 @@
 -- CreateEnum
-CREATE TYPE "Level" AS ENUM ('DEBUTANT', 'INTERMEDIAIRE', 'EXPERT', 'PRO');
+CREATE TYPE "Level" AS ENUM ('DEBUTANT', 'INTERMEDIAIRE', 'AVANCE', 'EXPERT');
 
 -- CreateTable
 CREATE TABLE "User" (
@@ -83,9 +83,6 @@ CREATE TABLE "Like" (
 CREATE TABLE "Rando" (
     "id" SERIAL NOT NULL,
     "alarm" BOOLEAN NOT NULL DEFAULT true,
-    "average" TEXT NOT NULL,
-    "longueur" TEXT NOT NULL,
-    "max" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "spotId" INTEGER,
@@ -97,7 +94,6 @@ CREATE TABLE "Rando" (
 -- CreateTable
 CREATE TABLE "Historique" (
     "id" SERIAL NOT NULL,
-    "average" TEXT NOT NULL,
     "time" TEXT NOT NULL,
     "longueur" TEXT NOT NULL,
     "max" TEXT NOT NULL,

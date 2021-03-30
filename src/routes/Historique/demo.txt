@@ -59,20 +59,39 @@
 
     ETAPE 1.
 
-        Récupération des 2 coordonnées :
-        --> DEBUT DU PARCOURS
-        --> FIN DU PARCOURS
+        Récupération de la longueur
     
     ETAPE 2.
 
         Calculer :
             function(coord1, coord2) {
-                const distance = getDistance(
+                const distance = getPreciseDistance(
                     {coord1}
                     {coord2}
                 )
                 return distance
             }
+
+    ETAPE 3.
+
+        Récupération du résultat
+
+********************************************************
+
+
+##
+# Vitesse Max
+## 
+
+    ETAPE 1.
+
+        Récupération de la vitesse max :
+        --> speed
+    
+    ETAPE 2.
+
+        Calculer m/H en km/h :
+            geolib.convertSpeed(speed, 'kmh'));
 
     ETAPE 3.
 

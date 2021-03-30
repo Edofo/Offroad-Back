@@ -9,14 +9,24 @@ api.delete('/:id', async (req, res) => {
         const id = parseInt(req.params.id)
 
         const prisma = new PrismaClient()
-    
-        const reportspot = await prisma.reportSpot.delete({
+
+        const historiqueCheck = await prisma.historique.findFirst({
+            where: {
+                id
+            }
+        })
+
+        if (!historiqueCheck) {
+            return res.status(400).json({ error: `this historique with id: ${id} doesn't exist` })
+        }
+        
+        const historique = await prisma.historique.delete({
             where: {
                 id,
             }
         })
 
-        res.json({ data: { reportspot } })
+        res.json({ data: { historique } })
     } catch (err) {
         res.status(400).json({ error: err.message })
     }

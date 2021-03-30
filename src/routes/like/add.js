@@ -21,8 +21,8 @@ api.post('/', async (req, res) => {
     
         const like = await prisma.like.create({
             data: {
-                spotId,
-                authorId
+                spotId: spotId,
+                authorId: authorId
             }
         })
 

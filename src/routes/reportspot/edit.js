@@ -22,20 +22,24 @@ api.patch('/:id', async (req, res) => {
 
         const prisma = new PrismaClient()
     
-        const reportspot = await prisma.reportspot.findFirst({
+        const reportspot = await prisma.reportSpot.findFirst({
             where: {
                 id
             }
         })
 
-        const updateReport = await prisma.reportspot.update({
+        if (!reportspot) {
+            return res.status(400).json({ error: `this report with id: ${id} doesn't exist` })
+        }
+
+        const updateReport = await prisma.reportSpot.update({
             where: {
                 id
             },
             data: {
                 content,
-                spotId,
-                authorId
+                spotId: spotId,
+                authorId: authorId
             }
         })
 
