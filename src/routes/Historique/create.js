@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import { PrismaClient } from '@prisma/client'
 import { isEmpty } from 'lodash'
-import { convertSpeed } from 'geolib'
+import { convertSpeed, getSpeed } from 'geolib'
 
 const api = Router()
 

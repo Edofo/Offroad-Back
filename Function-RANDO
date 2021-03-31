@@ -1,0 +1,76 @@
+********************************************************
+
+##
+# Secondes + Longueur + Speed
+## 
+
+    let coord = navigator.geolocation.getCurrentPosition(success, error)
+    let longueur = 0;
+    let speed = 0;
+    let secondes = 0;
+
+    setCoord(navigator.geolocation.getCurrentPosition(success, error)
+
+    function boucle() {
+
+        const distance = getPreciseDistance(
+            {coord},
+            {navigator.geolocation.getCurrentPosition(success, error)}
+        )
+
+        const speed2 =  getSpeed(
+            { coord, time: secondes * 1000 },
+            { navigator.geolocation.getCurrentPosition(success, error), time: secondes * 1000 + 1000 }
+        )
+        if(speed2 > Speed) {
+            speed = speed2
+        }
+
+        coord = navigator.geolocation.getCurrentPosition(success, error)
+        longueur = longueur + distance
+        secondes = secondes + 1    
+        
+        setTimeout(boucle, 1000);
+    }
+
+********************************************************
+
+##
+# Fetch rando
+##
+    const [rando, setRando] = useState([])
+
+    fetch(`http://10.3.2.188:4242/api/rando/${randoId}`)
+        .then(response => response.json())
+        .then(data => { setRando(data) });
+
+********************************************************
+
+##
+# Function Stop
+##
+
+    function Stop() {
+        fetch(`http://localhost:4242/api/historique/add`, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                distance: longueur,
+                temps: secondes,
+                spotId: spotId,
+                authorId: ${decryptToken.id}
+            })
+        })
+        .then((response) => response.json())
+        .then((responseData) => {
+            console.log(responseData)
+        })
+        .catch((error) =>{
+            console.error(error);
+        })
+    }
+
+********************************************************
