@@ -82,7 +82,6 @@
 
 ********************************************************
 
-
 ##
 # Vitesse Max
 ## 
@@ -100,5 +99,27 @@
     ETAPE 3.
 
         Récupération du résultat
+
+********************************************************
+
+##
+# Secondes + Longueur
+## 
+
+    setCoord(navigator.geolocation.getCurrentPosition(success, error)
+
+    function boucle() {
+
+        const distance = getPreciseDistance(
+            {coord.value},
+            {navigator.geolocation.getCurrentPosition(success, error)}
+        )
+        setCoord(navigator.geolocation.getCurrentPosition(success, error))
+        
+        secondes = secondes + 1    
+        longueur = longueur + distance
+        
+        setTimeout(boucle, 1000);
+    }
 
 ********************************************************
