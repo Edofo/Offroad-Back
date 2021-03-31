@@ -103,21 +103,34 @@
 ********************************************************
 
 ##
-# Secondes + Longueur
+# Secondes + Longueur + Speed
 ## 
+
+    let coord = navigator.geolocation.getCurrentPosition(success, error)
+    let longueur = 0;
+    let speed = 0;
+    let secondes = 0;
 
     setCoord(navigator.geolocation.getCurrentPosition(success, error)
 
     function boucle() {
 
         const distance = getPreciseDistance(
-            {coord.value},
+            {coord},
             {navigator.geolocation.getCurrentPosition(success, error)}
         )
-        setCoord(navigator.geolocation.getCurrentPosition(success, error))
-        
-        secondes = secondes + 1    
+
+        const speed2 =  getSpeed(
+            { coord, time: secondes * 1000 },
+            { navigator.geolocation.getCurrentPosition(success, error), time: secondes * 1000 + 1000 }
+        )
+        if(speed2 > Speed) {
+            speed = speed2
+        }
+
+        coord = navigator.geolocation.getCurrentPosition(success, error)
         longueur = longueur + distance
+        secondes = secondes + 1    
         
         setTimeout(boucle, 1000);
     }
