@@ -75,19 +75,40 @@ passport.use(new GoogleStrategy({
     callbackURL: process.env.GOOGLE_CALLBACK_URL,
     passReqToCallback: true
   },
-  function(request, accessToken, refreshToken, profile, done) {
+  async (request, accessToken, refreshToken, profile, next) => {
     try {
-      console.log('ID: '+profile.id);
-      console.log('Name: '+profile.displayName);
-      console.log('Email : '+profile.emails[0].value);
-      /* use the profile info (mainly profile id) to check if the user is registerd in ur db
-      *  If yes select the user and pass him to the done callback
-      *  If not create the user and then select him and pass to callback
-      */
-      return done(null, profile);
+      const prisma = new PrismaClient()
+
+      const user = await prisma.user.findUnique({ 
+        where: { 
+          email: profile.emails[0].value,
+        } 
+      })
+
+      if (!user) {
+
+        const createUser = await prisma.user.create({
+          data: {
+            pseudo: profile.name.givenName,
+            email: profile.emails[0].value,
+            encryptedPassword: '',
+            level: 'DEBUTANT',
+            notif: false,
+            sang: '',
+            allergie: '',
+            medicament: '',
+            other: '',
+            googleId: profile.id
+          }
+        })
+
+        next(null, profile);
+      }
+
+      next(null, profile);
 
     } catch (err) {
-      return(err.message, null)
+      next(err.message, null)
     }
   }
 ));

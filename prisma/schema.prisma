@@ -20,6 +20,7 @@ model User {
   allergie          String   
   medicament        String
   other             String
+  googleId          String
   posts             Post[]
   rSpot             ReportSpot[]
   rPost             ReportPost[]
