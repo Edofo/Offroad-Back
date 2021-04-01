@@ -37,7 +37,8 @@ api.post('/', async (req, res) => {
         sang: '',
         allergie: '',
         medicament: '',
-        other: ''
+        other: '',
+        googleId: ''
       }
     })
 
