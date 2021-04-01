@@ -5,5 +5,9 @@ export default [
   'JWT_ENCRYPTION',
   'API_KEY',
   'DOMAIN',
-  'MAILER_FROM'
+  'MAILER_FROM',
+  'GOOGLE_API_KEY',
+  'GOOGLE_ID',
+  'GOOGLE_SECRET',
+  'GOOGLE_CALLBACK_URL'
 ]

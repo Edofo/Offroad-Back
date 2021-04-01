@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import auth from './auth/router'
+import google from './auth/google'
 import spot from './spot/router'
 import post from './post/router'
 import like from './like/router'
@@ -16,6 +17,7 @@ router.get('/', (_req, res) => {
 })
 
 router.use('/auth', auth)
+router.use('/google', google)
 
 router.use('/spot', spot)
 
