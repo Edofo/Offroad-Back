@@ -12,7 +12,7 @@ model User {
   pseudo            String
   email             String   @unique
   encryptedPassword String
-  level             Level    @default(Debutant)
+  level             Level    @default(DEBUTANT)
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
   notif             Boolean  @default(false)
@@ -31,10 +31,11 @@ model User {
 
 model Spot {
   id          Int      @id @default(autoincrement())
-  level       Level	   @default(Debutant)
+  level       Level	   @default(DEBUTANT)
   adress      String   @unique
   lat         String
   lng         String
+  note        Int
   infos       String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
@@ -116,8 +117,8 @@ model Historique {
 }
 
 enum Level {
-  Debutant
-  Intermediaire
-  Avance
-  Expert
+  DEBUTANT
+  INTERMEDIAIRE
+  AVANCE
+  EXPERT
 }
