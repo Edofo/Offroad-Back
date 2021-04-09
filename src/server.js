@@ -15,8 +15,6 @@ async function server() {
   try {
     checkEnv()
 
-    // Try to connect to our database
-    const prisma = new PrismaClient()
     await prisma.$connect()
     mlog(`✨ Database successfully connected !`, 'SUCCESS')
 
