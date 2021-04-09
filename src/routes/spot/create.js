@@ -18,6 +18,9 @@ api.post('/', async (req, res) => {
         }
 
         const { level, adress, infos } = req.body
+            let lat = adress
+            let lng = adress
+
 
         const options = {
             provider: 'google',
@@ -31,15 +34,16 @@ api.post('/', async (req, res) => {
         
         geocoder.geocode(adress, function(err, res) {
             console.log(res);
-          });
+            l
+        });
 
         const spot = await prisma.spot.create({
             data: {
                 level,
                 adress,
                 infos,
-                lat: 'lol',
-                lng: 'lol'
+                lat,
+                lng
             }
         })
 
