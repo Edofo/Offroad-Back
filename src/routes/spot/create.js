@@ -22,7 +22,6 @@ api.post('/', async (req, res) => {
         const options = {
             provider: 'google',
            
-            apiKey: process.env.GOOGLE_ID,
             formatter: null
         };
         
