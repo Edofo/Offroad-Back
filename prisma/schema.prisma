@@ -36,7 +36,6 @@ model Spot {
   adress      String   @unique
   lat         String
   lng         String
-  note        Int
   infos       String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
