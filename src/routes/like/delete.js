@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { PrismaClient } from '@prisma/client'
+import prisma from '../../db'
 
 const api = Router()
 
@@ -8,7 +8,6 @@ api.delete('/:id', async (req, res) => {
 
         const id = parseInt(req.params.id, 10)
 
-        const prisma = new PrismaClient()
 
         const likeCheck = await prisma.like.findFirst({
             where: {

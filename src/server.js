@@ -1,12 +1,13 @@
 import express from 'express'
 import dotenv from 'dotenv'
-import { PrismaClient } from '@prisma/client'
 import cors from 'cors'
 
 import checkEnv from './utils/checkEnv'
 import mlog from './utils/mlog'
 import routes from './routes/router'
 import './middlewares/passport'
+
+import prisma from './db'
 
 import passport from 'passport'
 

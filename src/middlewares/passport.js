@@ -92,7 +92,7 @@ passport.use(new GoogleStrategy({
             pseudo: profile.name.givenName,
             email: profile.emails[0].value,
             encryptedPassword: '',
-            level: 'DEBUTANT',
+            level: 'Debutant',
             notif: false,
             sang: '',
             allergie: '',

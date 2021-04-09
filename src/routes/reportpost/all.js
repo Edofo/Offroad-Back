@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { PrismaClient } from '@prisma/client'
+import prisma from '../../db'
 
 const api = Router()
 
@@ -8,7 +8,6 @@ api.get('/:id', async (req, res) => {
 
         const id = parseInt(req.params.id)
 
-        const prisma = new PrismaClient()
 
         const reportpost = await prisma.reportPost.findMany({
             where: {

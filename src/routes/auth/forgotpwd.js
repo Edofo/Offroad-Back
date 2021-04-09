@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { PrismaClient } from '@prisma/client'
+import prisma from '../../db'
 import randomstring from 'randomstring'
 import sendMail from '../../services/sendMail'
 import { hashPassword } from '../../utils/password'
@@ -10,7 +10,6 @@ api.post('/', async (req, res) => {
   try {
     const { email } = req.body
   
-    const prisma = new PrismaClient()
     const user = await prisma.user.findFirst({ where: { email } })
   
     if (!user) {

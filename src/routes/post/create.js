@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { PrismaClient } from '@prisma/client'
+import prisma from '../../db'
 import { isEmpty } from 'lodash'
 
 const api = Router()
@@ -18,7 +18,6 @@ api.post('/', async (req, res) => {
 
         const { content, note, spotId, authorId } = req.body
 
-        const prisma = new PrismaClient()
     
         const post = await prisma.post.create({
             data: {

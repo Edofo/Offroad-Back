@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { PrismaClient } from '@prisma/client'
+import prisma from '../../db'
 import { isEmpty } from 'lodash'
 import { convertSpeed, getSpeed } from 'geolib'
 
@@ -34,7 +34,6 @@ api.post('/', async (req, res) => {
         const longueur = await distance + ' km/h';
         const max = await Math.floor(convertSpeed(speed, 'kmh')) + ' km/h';
 
-        const prisma = new PrismaClient()
     
         const historique = await prisma.historique.create({
             data: {

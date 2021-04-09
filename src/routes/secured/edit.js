@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { PrismaClient } from '@prisma/client'
+import prisma from '../../db'
 import { isEmpty } from 'lodash'
 import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv'
@@ -28,7 +28,6 @@ api.patch('/:id', async (req, res) => {
             })
         }
 
-        const prisma = new PrismaClient()
     
         const user = await prisma.user.findFirst({
             where: {
