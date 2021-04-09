@@ -22,10 +22,11 @@ api.post('/', async (req, res) => {
         const options = {
             provider: 'google',
            
+            apiKey: process.env.GOOGLE_ID,
             formatter: null
         };
         
-        const geocoder = NodeGeocoder(options);
+        const geocoder = NodeGeocoder();
         
         const res = await geocoder.geocode(adress);
         console.log(res)
