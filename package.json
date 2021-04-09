@@ -1,7 +1,7 @@
 {
-  "name": "hello-server",
+  "name": "offroad-server",
   "version": "1.0.0",
-  "description": "A simple server",
+  "description": "Officiel Server of Offroad Bike Trip",
   "main": "src/server.js",
   "author": "Nolan / Ponch / Seb / Matthieu",
   "license": "ISC",
@@ -10,10 +10,6 @@
     "start": "npx babel-node src/server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [
-    "server",
-    "API"
-  ],
   "dependencies": {
     "@prisma/client": "^2.18.0",
     "bcryptjs": "^2.4.3",
@@ -32,6 +28,7 @@
     "randomstring": "^1.1.5"
   },
   "devDependencies": {
+    "@babel/cli": "^7.13.14",
     "@babel/core": "^7.13.10",
     "@babel/node": "^7.13.0",
     "@babel/preset-env": "^7.13.9",
