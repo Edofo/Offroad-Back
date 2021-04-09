@@ -32,10 +32,10 @@ model User {
 model Spot {
   id          Int      @id @default(autoincrement())
   level       Level	   @default(DEBUTANT)
+  note        Int
   adress      String   @unique
   lat         String
   lng         String
-  note        Int
   infos       String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
