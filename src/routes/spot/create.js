@@ -26,7 +26,7 @@ api.post('/', async (req, res) => {
             formatter: null
         };
         
-        const geocoder = NodeGeocoder();
+        const geocoder = NodeGeocoder(options);
         
         const res = await geocoder.geocode(adress);
         console.log(res)
