@@ -1,5 +1,3 @@
-import fs from 'fs'
-import path from 'path'
 import mlog from './mlog'
 import dotenv from 'dotenv'
 import { isEmpty } from 'lodash'
@@ -7,11 +5,6 @@ import { isEmpty } from 'lodash'
 import config from '../constants/config'
 
 export default function checkEnv() {
-  const envFilePath = path.join(process.cwd(), '.env')
-  if (!fs.existsSync(envFilePath)) {
-    mlog('Please add a .env file')
-    process.exit(0)
-  }
 
   dotenv.config()
   const missingValues = config.filter(key => process.env[key] === undefined)

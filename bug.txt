@@ -1,5 +1,0 @@
-{
-    "error": "\nInvalid `prisma.historique.create()` invocation:\n\n\n  Foreign key constraint failed on the field: `(not available)`"
-}
-
---> id inexistant
