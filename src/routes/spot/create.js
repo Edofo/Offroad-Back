@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import prisma from '../../db'
 import { isEmpty } from 'lodash'
-import {Client} from "@googlemaps/google-maps-services-js";
+import axios from 'axios'
 
 const api = Router()
 
@@ -19,17 +19,15 @@ api.post('/', async (req, res) => {
 
         const { level, adress, infos } = req.body
 
-        const client = new Client({});
-        
-        client.geocode({address: adress})
-        .asPromise()
-        .then((response) => {
-            console.log('OK');
+        axios.get('https://maps.googleapis.com/maps/api/geocode/json',{
+            params:{
+                address: adress,
+                key: process.env.GOOGLE_API_KEY
+            }
+        })
+        .then(function(response){
             console.log(response);
         })
-        .catch((err) => {
-            console.log(err);
-        });
 
         const spot = await prisma.spot.create({
             data: {
