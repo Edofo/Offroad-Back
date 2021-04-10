@@ -1,0 +1,124 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                Int      @id @default(autoincrement())
+  pseudo            String
+  email             String   @unique
+  encryptedPassword String
+  level             Level    @default(DEBUTANT)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  notif             Boolean  @default(false)
+  sang              String   
+  allergie          String   
+  medicament        String
+  other             String
+  googleId          String
+  posts             Post[]
+  rSpot             ReportSpot[]
+  rPost             ReportPost[]
+  likes             Like[]
+  randos            Rando[]
+  historiques       Historique[]
+}
+
+model Spot {
+  id          Int      @id @default(autoincrement())
+  level       Level	   @default(DEBUTANT)
+  note        Int
+  adress      String   @unique
+  lat         String
+  lng         String
+  infos       String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  posts       Post[]
+  rSpot       ReportSpot[]
+  likes       Like[]
+  randos      Rando[]
+  historiques Historique[]
+}
+
+model Post {
+  id         Int      @id @default(autoincrement())
+  content    String
+  note       Int
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  spot       Spot?    @relation(fields: [spotId], references: [id])
+  spotId     Int?
+  author     User?    @relation(fields: [authorId], references: [id])
+  authorId   Int?
+  rPosts     ReportPost[]
+}
+
+model ReportSpot {
+  id         Int      @id @default(autoincrement())
+  content    String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  spot       Spot?    @relation(fields: [spotId], references: [id])
+  spotId     Int?
+  author     User?    @relation(fields: [authorId], references: [id])
+  authorId   Int?
+}
+
+model ReportPost {
+  id         Int      @id @default(autoincrement())
+  content    String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  post       Post?    @relation(fields: [postId], references: [id])
+  postId     Int?
+  author     User?    @relation(fields: [authorId], references: [id])
+  authorId   Int?
+}
+
+model Like {
+  id         Int      @id @default(autoincrement()) 
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  spot       Spot?    @relation(fields: [spotId], references: [id])
+  spotId     Int?
+  author     User?    @relation(fields: [authorId], references: [id])
+  authorId   Int?
+}
+
+model Rando {
+  id         Int      @id @default(autoincrement()) 
+  alarm      Boolean  @default(true)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  spot       Spot?    @relation(fields: [spotId], references: [id])
+  spotId     Int?
+  author     User?    @relation(fields: [authorId], references: [id])
+  authorId   Int?
+}
+
+model Historique {
+  id         Int      @id @default(autoincrement()) 
+  vMoyen     String  
+  time       String
+  longueur   String
+  max        String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  spot       Spot?    @relation(fields: [spotId], references: [id])
+  spotId     Int?
+  author     User?    @relation(fields: [authorId], references: [id])
+  authorId   Int?
+}
+
+enum Level {
+  DEBUTANT
+  INTERMEDIAIRE
+  AVANCE
+  EXPERT
+}
