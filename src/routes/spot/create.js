@@ -22,12 +22,13 @@ api.post('/', async (req, res) => {
         var googleMapsClient = require('@google/maps').createClient({
             clientID: process.env.GOOGLE_ID,
             clientSecret: process.env.GOOGLE_SECRET,
+            Promise: Promise
         });
         
         googleMapsClient.geocode({address: adress})
         .asPromise()
         .then((response) => {
-            console.log('OK')
+            console.log('OK');
             console.log(response.json.results);
         })
         .catch((err) => {
