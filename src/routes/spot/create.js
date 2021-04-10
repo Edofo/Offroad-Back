@@ -33,8 +33,8 @@ api.post('/', async (req, res) => {
                     level,
                     adress,
                     infos,
-                    lat: '',
-                    lng: '',
+                    lat: response.data.results[0].geometry.location.lat,
+                    lng: response.data.results[0].geometry.location.lng,
                     note: 0,
                 }
             })
