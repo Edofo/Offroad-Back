@@ -26,21 +26,23 @@ api.post('/', async (req, res) => {
             }
         })
         .then(function(response){
-            console.log(response);
+            console.log(response.data.results[0]);
+
+            const spot = await prisma.spot.create({
+                data: {
+                    level,
+                    adress,
+                    infos,
+                    lat: '',
+                    lng: '',
+                    note: 0,
+                }
+            })
+
+            res.json({ data: { spot } })
         })
 
-        const spot = await prisma.spot.create({
-            data: {
-                level,
-                adress,
-                infos,
-                lat: '',
-                lng: '',
-                note: 2,
-            }
-        })
-
-        res.json({ data: { spot } })
+        
     } catch (err) {
         res.status(400).json({ error: err.message })
     }
