@@ -25,7 +25,7 @@ api.post('/', async (req, res) => {
                 key: process.env.GOOGLE_API_KEY
             }
         })
-        .then(function(response){
+        .then(async function(response){
             console.log(response.data.results[0]);
 
             const spot = await prisma.spot.create({
