@@ -19,14 +19,18 @@ api.post('/', async (req, res) => {
 
         const { level, adress, infos } = req.body
 
-        let geocoder = new google.maps.Geocoder();
-
-        geocoder.geocode( { 'address': adress}, function(results, status) {
-        if (status == 'OK') {
-            console.log(results[0].geometry.location)
-        } else {
-            alert('Geocode was not successful for the following reason: ' + status);
-        }
+        const googleMapsClient = require('@google/maps').createClient({
+            key: process.env.GOOGLE_API_KEY,
+            Promise: Promise
+        });
+        
+        googleMapsClient.geocode({address: adress})
+        .asPromise()
+        .then((response) => {
+            console.log(response.json.results);
+        })
+        .catch((err) => {
+            console.log(err);
         });
 
         const spot = await prisma.spot.create({
