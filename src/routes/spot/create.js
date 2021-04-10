@@ -19,29 +19,15 @@ api.post('/', async (req, res) => {
 
         const { level, adress, infos } = req.body
 
-        fetch('https://maps.googleapis.com/maps/api/geocode/json',{
-            params:{
-                address: adress,
-                key: process.env.GOOGLE_API_KEY
-            }
-        })
-        .then(function(response){
-            console.log(response);
-            console.log(response.data.results[0].geometry.location.lat)
-        })
+        let geocoder = new google.maps.Geocoder();
 
-        // const options = {
-        //     provider: 'google',
-           
-        //     apiKey: process.env.GOOGLE_API_KEY,
-        //     formatter: null
-        // };
-        
-        // const geocoder = NodeGeocoder(options);
-        
-        // const res = await geocoder.geocode('29 champs elysée paris');
-
-        // console.log(res)
+        geocoder.geocode( { 'address': adress}, function(results, status) {
+        if (status == 'OK') {
+            console.log(results[0].geometry.location)
+        } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+        }
+        });
 
         const spot = await prisma.spot.create({
             data: {
