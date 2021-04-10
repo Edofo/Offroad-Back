@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import prisma from '../../db'
 import { isEmpty } from 'lodash'
-import NodeGeocoder from 'node-geocoder'
+import {Client} from "@googlemaps/google-maps-services-js";
 
 const api = Router()
 
@@ -19,17 +19,13 @@ api.post('/', async (req, res) => {
 
         const { level, adress, infos } = req.body
 
-        var googleMapsClient = require('@google/maps').createClient({
-            clientID: process.env.GOOGLE_ID,
-            clientSecret: process.env.GOOGLE_SECRET,
-            Promise: Promise
-        });
+        const client = new Client({});
         
-        googleMapsClient.geocode({address: adress})
+        client.geocode({address: adress})
         .asPromise()
         .then((response) => {
             console.log('OK');
-            console.log(response.json.results);
+            console.log(response);
         })
         .catch((err) => {
             console.log(err);
