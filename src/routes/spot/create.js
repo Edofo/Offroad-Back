@@ -19,14 +19,15 @@ api.post('/', async (req, res) => {
 
         const { level, adress, infos } = req.body
 
-        const googleMapsClient = require('@google/maps').createClient({
-            key: process.env.GOOGLE_API_KEY,
-            Promise: Promise
+        var googleMapsClient = require('@google/maps').createClient({
+            clientID: process.env.GOOGLE_ID,
+            clientSecret: process.env.GOOGLE_SECRET,
         });
         
         googleMapsClient.geocode({address: adress})
         .asPromise()
         .then((response) => {
+            console.log('OK')
             console.log(response.json.results);
         })
         .catch((err) => {
