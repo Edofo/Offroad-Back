@@ -31,16 +31,19 @@ api.post('/', async (req, res) => {
             where: {
                 spotId,
             },
+            select: {
+                note: true,
+            }
         }).then(async(response) => {
             
             let count = 0;
             let moyen = 0;
 
             for(let i = 0; 0 < response.length; i++) {
-                count = count + response[i].note
+                count = count + response[i].note;
 
                 if(i + 1 == response.length) {
-                    moyen = Math.floor(count / response.length)
+                    moyen = Math.floor((count / response.length) * 10) / 10;
                     console.log(moyen)
 
                     const spotInfos = await prisma.spot.update({
