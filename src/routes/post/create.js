@@ -1,4 +1,4 @@
-import { response, Router } from 'express'
+import { Router } from 'express'
 import prisma from '../../db'
 import { isEmpty } from 'lodash'
 
@@ -42,8 +42,9 @@ api.post('/', async (req, res) => {
             for(let i = 0; 0 < response.length; i++) {
                 count = count + response[i].note
                 console.log(count)
+                console.log(i)
 
-                if(i == response.length) {
+                if(i >= response.length) {
                     moyen = Math.floor(count / response.length)
                     console.log(moyen)
 
