@@ -32,21 +32,14 @@ api.post('/', async (req, res) => {
             where: {
                 id: spotId
             },
-            select: {
-                note: true,
-            }
         }).then(async(response) => {
             console.log('OK')
             console.log(response)
             console.log('BAH')
             console.log({response})
-            console.log('OH')
-            console.log(spotNote)
-            console.log('AH')
-            console.log({spotNote})
         })
 
-        res.json({ data: { post, spotNote } })
+        res.json({ data: { post } })
     } catch (err) {
         res.status(400).json({ error: err.message })
     }
