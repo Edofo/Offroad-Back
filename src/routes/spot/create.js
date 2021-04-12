@@ -8,7 +8,7 @@ const api = Router()
 api.post('/', async (req, res) => {
     try {
 
-        const acceptedFields = ['level', 'adress', "infos"]
+        const acceptedFields = ['level', 'adress', "infos", "note"]
 
         const missingValues = acceptedFields.filter(field => !req.body[field])
         if (!isEmpty(missingValues)) {
@@ -17,7 +17,7 @@ api.post('/', async (req, res) => {
             })
         }
 
-        const { level, adress, infos } = req.body
+        const { level, adress, infos, note } = req.body
 
         axios.get('https://maps.googleapis.com/maps/api/geocode/json',{
             params:{
@@ -35,7 +35,7 @@ api.post('/', async (req, res) => {
                     infos,
                     lat: response.data.results[0].geometry.location.lat,
                     lng: response.data.results[0].geometry.location.lng,
-                    note: 0,
+                    note,
                 }
             })
 

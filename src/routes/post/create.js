@@ -28,6 +28,17 @@ api.post('/', async (req, res) => {
             }
         })
 
+        const note = await prisma.post.findMany({
+            where: {
+                id: spotId
+            },
+            select: {
+                note
+            }
+        }).then(async = (note) => {
+            console.log(note)
+        })
+
         res.json({ data: { post } })
     } catch (err) {
         res.status(400).json({ error: err.message })
