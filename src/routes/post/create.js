@@ -30,7 +30,7 @@ api.post('/', async (req, res) => {
 
         const spotNote = await prisma.post.findMany({
             where: {
-                note: 2
+                note: spotId,
             },
             select: {
                 note: true,
@@ -38,6 +38,8 @@ api.post('/', async (req, res) => {
         }).then(async(response) => {
             console.log('OK')
             console.log(response)
+            console.log('BAH')
+            console.log(response.length)
         })
 
         res.json({ data: { post } })
