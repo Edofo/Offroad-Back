@@ -1,4 +1,4 @@
-import { Router } from 'express'
+import { response, Router } from 'express'
 import prisma from '../../db'
 import { isEmpty } from 'lodash'
 
@@ -31,12 +31,22 @@ api.post('/', async (req, res) => {
         const spotNote = await prisma.post.findMany({
             where: {
                 id: spotId
+            },
+            select: {
+                note: true,
             }
+        }).then(async(response) => {
+            console.log('OK')
+            console.log(response)
+            console.log('BAH')
+            console.log({response})
+            console.log('OH')
+            console.log(spotNote)
+            console.log('AH')
+            console.log({spotNote})
         })
 
-        console.log({ spotNote })
-
-        res.json({ data: { post } })
+        res.json({ data: { post, spotNote } })
     } catch (err) {
         res.status(400).json({ error: err.message })
     }
