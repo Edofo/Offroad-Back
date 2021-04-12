@@ -33,7 +33,7 @@ api.post('/', async (req, res) => {
                 id: spotId
             },
             select: {
-                note
+                note: true
             }
         }).then(async function() {
             console.log(spotNote)
