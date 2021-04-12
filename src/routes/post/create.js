@@ -39,6 +39,14 @@ api.post('/', async (req, res) => {
             console.log(response)
             console.log('BAH')
             console.log(response.length)
+            
+            let count = 0;
+            let moyen = 0;
+
+            for(i = 0; 0 < response.length; i++) {
+                count = count + response[i].note
+                console.log(count)
+            }
         })
 
         res.json({ data: { post } })
