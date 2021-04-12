@@ -34,8 +34,8 @@ model Spot {
   level       Level	   @default(DEBUTANT)
   note        Int
   adress      String   @unique
-  lat         Int
-  lng         Int
+  lat         Float
+  lng         Float
   infos       String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
