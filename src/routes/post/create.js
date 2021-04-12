@@ -34,7 +34,7 @@ api.post('/', async (req, res) => {
             }
         })
 
-        console.log(spotNote)
+        console.log({ data: { spotNote }})
 
         res.json({ data: { post } })
     } catch (err) {
