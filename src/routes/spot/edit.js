@@ -38,21 +38,24 @@ api.patch('/:id', async (req, res) => {
                 key: process.env.GOOGLE_API_KEY
             }
         })
+        
+        .then(async function(response){
 
-        const updateSpot = await prisma.spot.update({
-            where: {
-                id
-            },
-            data: {
-                level,
-                adress,
-                lat: response.data.results[0].geometry.location.lat,
-                lng: response.data.results[0].geometry.location.lng,
-                infos
-            }
+            const updateSpot = await prisma.spot.update({
+                where: {
+                    id
+                },
+                data: {
+                    level,
+                    adress,
+                    lat: response.data.results[0].geometry.location.lat,
+                    lng: response.data.results[0].geometry.location.lng,
+                    infos
+                }
+            })
+            res.json({ data: { spot, updateSpot } })
         })
-
-        res.json({ data: { spot, updateSpot } })
+        
     } catch (err) {
         res.status(400).json({ error: err.message })
     }
