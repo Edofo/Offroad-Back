@@ -35,7 +35,7 @@ api.post('/', async (req, res) => {
             select: {
                 note
             }
-        }).then(async = (note) => {
+        }).then(async function(note) {
             console.log(note)
         })
 
