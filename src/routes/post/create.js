@@ -41,7 +41,6 @@ api.post('/', async (req, res) => {
 
             for(let i = 0; 0 < response.length; i++) {
                 count = count + response[i].note
-                console.log(count)
                 console.log(i)
 
                 if(i >= response.length) {
