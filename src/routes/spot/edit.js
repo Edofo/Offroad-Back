@@ -31,6 +31,13 @@ api.patch('/:id', async (req, res) => {
             return res.status(400).json({ error: `this report with id: ${id} doesn't exist` })
         }
 
+        axios.get('https://maps.googleapis.com/maps/api/geocode/json',{
+            params:{
+                address: adress,
+                key: process.env.GOOGLE_API_KEY
+            }
+        })
+        
         const updateSpot = await prisma.spot.update({
             where: {
                 id
@@ -38,6 +45,8 @@ api.patch('/:id', async (req, res) => {
             data: {
                 level,
                 adress,
+                lat: response.data.results[0].geometry.location.lat,
+                lng: response.data.results[0].geometry.location.lng,
                 infos
             }
         })
