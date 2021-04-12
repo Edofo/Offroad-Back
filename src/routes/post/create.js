@@ -35,8 +35,8 @@ api.post('/', async (req, res) => {
             select: {
                 note
             }
-        }).then(async function(note) {
-            console.log(note)
+        }).then(async function() {
+            console.log(spotNote)
         })
 
         res.json({ data: { post } })
