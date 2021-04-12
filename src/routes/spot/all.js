@@ -9,14 +9,14 @@ api.get('/:level', async (req, res) => {
 
     const acceptedFields = ['level']
 
-    const missingValues = acceptedFields.filter(field => !req.body[field])
+    const missingValues = acceptedFields.filter(field => !req.params.level)
     if (!isEmpty(missingValues)) {
       return res.status(400).json({
         error: `Values ${missingValues.join(', ')} are missing`
       })
     }
 
-    const { level } = req.body
+    const { level } = req.params.level
 
 
     const spot = await prisma.spot.findMany({
