@@ -6,7 +6,7 @@ import update from './edit'
 
 const api = Router()
 
-api.use('/', all)
+api.use('/level', all)
 api.use('/add', create)
 api.use('/delete', del)
 api.use('/edit', update)
