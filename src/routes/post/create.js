@@ -54,11 +54,12 @@ api.post('/', async (req, res) => {
                             note: moyen,
                         }
                     })
+
+                    res.json({ data: { post, spotInfos } })
                 }
             }
         })
-
-        res.json({ data: { post } })
+        
     } catch (err) {
         res.status(400).json({ error: err.message })
     }
