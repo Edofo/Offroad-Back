@@ -16,8 +16,7 @@ api.get('/:level', async (req, res) => {
       })
     }
 
-    const { level } = req.params.level
-
+    const level  = req.params.level
 
     const spot = await prisma.spot.findMany({
       where: {
