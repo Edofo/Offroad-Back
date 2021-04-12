@@ -43,9 +43,20 @@ api.post('/', async (req, res) => {
             let count = 0;
             let moyen = 0;
 
-            for(i = 0; 0 < response.length; i++) {
+            for(let i = 0; 0 < response.length; i++) {
                 count = count + response[i].note
                 console.log(count)
+
+                if(i = response.length) {
+                    const spotInfos = await prisma.spot.update({
+                        where: {
+                            id: spotId,
+                        },
+                        data: {
+                            note: moyen
+                        }
+                    })
+                }
             }
         })
 
