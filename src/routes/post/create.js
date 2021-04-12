@@ -31,9 +31,6 @@ api.post('/', async (req, res) => {
             where: {
                 spotId,
             },
-            select: {
-                note: true,
-            }
         }).then(async(response) => {
             
             let count = 0;
@@ -41,9 +38,8 @@ api.post('/', async (req, res) => {
 
             for(let i = 0; 0 < response.length; i++) {
                 count = count + response[i].note
-                console.log(i)
 
-                if(i >= response.length) {
+                if(i + 1 == response.length) {
                     moyen = Math.floor(count / response.length)
                     console.log(moyen)
 
