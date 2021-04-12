@@ -4,7 +4,7 @@ import { isEmpty } from 'lodash'
 
 const api = Router()
 
-api.get('', async (req, res) => {
+api.get('/', async (req, res) => {
   try {
 
     const acceptedFields = ['level']
