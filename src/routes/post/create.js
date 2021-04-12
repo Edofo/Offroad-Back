@@ -30,14 +30,14 @@ api.post('/', async (req, res) => {
 
         const spotNote = await prisma.post.findMany({
             where: {
-                id: spotId
+                note: 2
             },
             select: {
                 note: true,
             }
         }).then(async(response) => {
             console.log('OK')
-            setTimeout(console.log(response), 4000)
+            console.log(response)
         })
 
         res.json({ data: { post } })
