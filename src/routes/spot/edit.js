@@ -1,6 +1,7 @@
 import { Router } from 'express'
 import prisma from '../../db'
 import { isEmpty } from 'lodash'
+import axios from 'axios'
 
 const api = Router()
 
@@ -37,7 +38,7 @@ api.patch('/:id', async (req, res) => {
                 key: process.env.GOOGLE_API_KEY
             }
         })
-        
+
         const updateSpot = await prisma.spot.update({
             where: {
                 id
