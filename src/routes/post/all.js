@@ -8,11 +8,12 @@ api.get('/:id', async (req, res) => {
 
         const spotId = parseInt(req.params.id)
 
-
         const post = await prisma.post.findMany({
             where: {
                 spotId: spotId
             }
+        }).then((response) => {
+            console.log(response)
         })
 
         res.json({ data: { post } })
