@@ -8,7 +8,7 @@ const api = Router()
 api.post('/', async (req, res) => {
     try {
 
-        const acceptedFields = ['level', 'adress', "infos", "note", "content"]
+        const acceptedFields = ['level', 'adress', "infos", "noteUser", "content", "authorId", "userName"]
 
         const missingValues = acceptedFields.filter(field => !req.body[field])
         if (!isEmpty(missingValues)) {
