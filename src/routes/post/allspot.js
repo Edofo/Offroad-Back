@@ -13,7 +13,7 @@ api.get('/:id', async (req, res) => {
             where: {
                 spotId: id
             }
-        }).then((response) => {
+        }).then(async(response) => {
 
             const user = await prisma.user.findMany({
                 where: {
