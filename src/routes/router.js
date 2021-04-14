@@ -1,4 +1,6 @@
 import { Router } from 'express'
+import passport from 'passport'
+
 import auth from './auth/router'
 import google from './auth/google'
 import spot from './spot/router'
@@ -8,7 +10,7 @@ import historique from './historique/router'
 import reportpost from './reportpost/router'
 import reportspot from './reportspot/router'
 import secured from './secured/router'
-import passport from 'passport'
+import convert from './convert'
 
 const router = Router()
 
@@ -29,5 +31,7 @@ router.use('/reportpost', reportpost)
 router.use('/reportspot', reportspot)
 
 router.use('/users', passport.authenticate('jwt', { session: false }), secured)
+
+router.use('/convert', convert)
 
 export default router
