@@ -8,7 +8,7 @@ const api = Router()
 api.post('/', async (req, res) => {
     try {
 
-        const acceptedFields = ['level', 'adress', "infos", "note"]
+        const acceptedFields = ['level', 'adress', "infos", "note", "content"]
 
         const missingValues = acceptedFields.filter(field => !req.body[field])
         if (!isEmpty(missingValues)) {
@@ -17,7 +17,7 @@ api.post('/', async (req, res) => {
             })
         }
 
-        const { level, adress, infos, note } = req.body
+        const { level, adress, infos, noteUser, content, authorId, userName } = req.body
 
         axios.get('https://maps.googleapis.com/maps/api/geocode/json',{
             params:{
@@ -34,11 +34,21 @@ api.post('/', async (req, res) => {
                     infos,
                     lat: response.data.results[0].geometry.location.lat,
                     lng: response.data.results[0].geometry.location.lng,
-                    note,
+                    note: noteUser,
+                }
+            })
+            
+            const post = await prisma.post.create({
+                data: {
+                    content,
+                    note: noteUser,
+                    spotId: spot.id,
+                    authorId,
+                    userName
                 }
             })
 
-            res.json({ data: { spot } })
+            res.json({ data: { spot, post } })
         })
 
         
