@@ -7,8 +7,6 @@ api.get('/:id', async (req, res) => {
     try {
         const id = parseInt(req.params.id)
 
-        let data = [];
-
         const post = await prisma.post.findMany({
             where: {
                 spotId: id
@@ -18,10 +16,14 @@ api.get('/:id', async (req, res) => {
             const user = await prisma.user.findMany({
                 where: {
                     id: response.id
+                },
+                select: {
+                    pseudo: true,
+                    level: true
                 }
             })
 
-            res.json({ data: { post, user } })
+            res.json({ data: { post } })
         })
 
         
