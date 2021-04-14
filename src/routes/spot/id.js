@@ -16,9 +16,11 @@ api.get('/:id', async (req, res) => {
       })
     }
 
+    const id = parseInt(req.params.id)
+
     const spot = await prisma.spot.findFirst({
       where: {
-        id: req.params.id,
+        id,
       }
     })
 
