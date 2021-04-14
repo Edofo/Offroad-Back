@@ -8,7 +8,7 @@ import update from './edit'
 const api = Router()
 
 api.use('/', all)
-api.use('/unique/', id)
+api.use('/unique', id)
 api.use('/add', create)
 api.use('/delete', del)
 api.use('/edit', update)
