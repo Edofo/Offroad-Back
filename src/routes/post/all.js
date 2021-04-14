@@ -12,8 +12,6 @@ api.get('/:id', async (req, res) => {
             where: {
                 spotId: spotId
             }
-        }).then((response) => {
-            console.log(response)
         })
 
         res.json({ data: { post } })
