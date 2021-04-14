@@ -7,7 +7,7 @@ const api = Router()
 api.post('/', async (req, res) => {
     try {
 
-        const acceptedFields = ['content', 'noteUser', 'spotId', 'authorId', 'userName']
+        const acceptedFields = ['content', 'noteUser', 'postId', 'authorId', 'userName']
 
         const missingValues = acceptedFields.filter(field => !req.body[field])
         if (!isEmpty(missingValues)) {
@@ -16,13 +16,13 @@ api.post('/', async (req, res) => {
             })
         }
 
-        const { content, noteUser, spotId, authorId, userName } = req.body
+        const { content, noteUser, postId, authorId, userName } = req.body
 
         const post = await prisma.post.create({
             data: {
                 content,
                 note: noteUser,
-                spotId: spotId,
+                postId: postId,
                 authorId: authorId,
                 userName,
             }
