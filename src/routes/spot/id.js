@@ -16,11 +16,9 @@ api.get('/:id', async (req, res) => {
       })
     }
 
-    const id  = req.params.id
-
-    const spot = await prisma.spot.findMany({
+    const spot = await prisma.spot.findFirst({
       where: {
-        id
+        id: req.params.id,
       }
     })
 
