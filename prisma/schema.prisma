@@ -37,6 +37,7 @@ model Spot {
   lat         Float
   lng         Float
   infos       String
+  photo       String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   posts       Post[]
