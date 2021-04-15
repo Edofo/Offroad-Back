@@ -36,8 +36,6 @@ api.post('/', async (req, res) => {
             })
             .then(async(response) => {
 
-                console.log(response.request.res.responseUrl)
-
                 const spot = await prisma.spot.create({
                     data: {
                         level,
@@ -46,6 +44,7 @@ api.post('/', async (req, res) => {
                         lat: responseData.data.candidates[0].geometry.location.lat,
                         lng: responseData.data.candidates[0].geometry.location.lng,
                         note: noteUser,
+                        photo: response.request.res.responseUrl
                     }
                 })
                 
