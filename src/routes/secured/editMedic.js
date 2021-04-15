@@ -11,7 +11,7 @@ api.patch('/:id', async (req, res) => {
     try {
         const id = parseInt(req.params.id)
 
-        const acceptedFields = ["sang", "allergie", "medicament", "other"]
+        const acceptedFields = ["sang", "allergie", "medicament", "taille", "poids", "tel", "other"]
 
         const missingValues = acceptedFields.filter(field => !req.body[field])
         if (!isEmpty(missingValues)) {
@@ -20,7 +20,7 @@ api.patch('/:id', async (req, res) => {
             })
         }
 
-        const { sang, allergie, medicament, other } = req.body
+        const { sang, allergie, medicament, taille, poids, tel, other } = req.body
     
         const user = await prisma.user.findFirst({
             where: {
