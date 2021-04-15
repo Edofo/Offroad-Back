@@ -26,6 +26,13 @@ api.post('/', async (req, res) => {
                 key: process.env.GOOGLE_API_KEY
             }
         })
+        
+        axios.get('https://maps.googleapis.com/maps/api/place/findplacefromtext/json',{
+            params:{
+                input: adress,
+                key: process.env.GOOGLE_API_KEY
+            }
+        })
         .then(async(response) => {
 
             console.log('AH')
