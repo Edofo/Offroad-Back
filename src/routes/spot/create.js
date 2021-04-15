@@ -27,9 +27,6 @@ api.post('/', async (req, res) => {
         })
         .then(async(responseData) => {
 
-            console.log('AH')
-            console.log(responseData)
-
             axios.get('https://maps.googleapis.com/maps/api/place/photo', {
                 params: {
                     photoreference: responseData.data.candidates[0].photos[0].photo_reference,
@@ -39,7 +36,6 @@ api.post('/', async (req, res) => {
             })
             .then(async(response) => {
 
-                console.log('BH')
                 console.log(response)
 
                 const spot = await prisma.spot.create({
@@ -59,7 +55,7 @@ api.post('/', async (req, res) => {
                         note: noteUser,
                         spotId: spot.id,
                         authorId,
-                        userName
+                        userName,
                     }
                 })
 
