@@ -43,10 +43,6 @@ api.patch('/:id', async (req, res) => {
             }
         })
 
-        const payload = { pseudo, email, id, level }
-        dotenv.config()
-        const token = jwt.sign(payload, process.env.JWT_ENCRYPTION)
-
         res.json({ data: { user, updateUser, token } })
     } catch (err) {
         res.status(400).json({ error: err.message })
