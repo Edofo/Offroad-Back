@@ -2,6 +2,9 @@ import express from 'express'
 import dotenv from 'dotenv'
 import cors from 'cors'
 
+import * as Sentry from '@sentry/node';
+import * as Tracing from '@sentry/tracing';
+
 import checkEnv from './utils/checkEnv'
 import mlog from './utils/mlog'
 import routes from './routes/router'
@@ -18,6 +21,27 @@ async function server() {
     await prisma.$connect()
     mlog(`✨ Database successfully connected !`, 'SUCCESS')
 
+
+    Sentry.init({
+      dsn: process.env.SENTRY_DNS,
+    
+      tracesSampleRate: 1.0,
+    });
+    
+    const transaction = Sentry.startTransaction({
+      op: "test",
+      name: "My First Test Transaction",
+    });
+    
+    setTimeout(() => {
+      try {
+        foo();
+      } catch (e) {
+        Sentry.captureException(e);
+      } finally {
+        transaction.finish();
+      }
+    }, 99);
 
     const app = express()
 
