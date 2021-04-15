@@ -11,7 +11,7 @@ api.patch('/:id', async (req, res) => {
     try {
         const id = parseInt(req.params.id)
 
-        const acceptedFields = ['pseudo', 'email', "password", "passwordConfirmation", "level", "notif"]
+        const acceptedFields = ["sang", "allergie", "medicament", "other"]
 
         const missingValues = acceptedFields.filter(field => !req.body[field])
         if (!isEmpty(missingValues)) {
@@ -20,14 +20,7 @@ api.patch('/:id', async (req, res) => {
             })
         }
 
-        const { pseudo, email, password, passwordConfirmation, level, notif } = req.body
-
-        if (password !== passwordConfirmation) {
-            return res.status(400).json({
-            error: "Password and confirmation doesn't match"
-            })
-        }
-
+        const { sang, allergie, medicament, other } = req.body
     
         const user = await prisma.user.findFirst({
             where: {
@@ -40,11 +33,13 @@ api.patch('/:id', async (req, res) => {
                 id
             },
             data: {
-                pseudo,
-                email,
-                level,
-                encryptedPassword: hashPassword(password),
-                notif,
+                sang,
+                allergie,
+                medicament,
+                taille,
+                poids,
+                tel,
+                other
             }
         })
 

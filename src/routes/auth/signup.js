@@ -37,6 +37,9 @@ api.post('/', async (req, res) => {
         sang: '',
         allergie: '',
         medicament: '',
+        taille: '',
+        poids: '',
+        tel: '07 00 00 01 11',
         other: '',
         googleId: ''
       }

@@ -19,6 +19,9 @@ model User {
   sang              String   
   allergie          String   
   medicament        String
+  taille            String
+  poids             String
+  tel               String
   other             String
   googleId          String
   posts             Post[]
