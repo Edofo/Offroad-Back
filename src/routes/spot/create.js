@@ -19,17 +19,16 @@ api.post('/', async (req, res) => {
 
         const { level, adress, infos, noteUser, content, authorId, userName } = req.body
 
-        axios.get('https://maps.googleapis.com/maps/api/place/findplacefromtext/json',{
+        axios.get('https://maps.googleapis.com/maps/api/place/findplacefromtext/json?inputtype=textquery&fields=photos,formatted_address,name,geometry',{
             params:{
                 input: adress,
-                inputtype: textquery,
                 key: process.env.GOOGLE_API_KEY
             }
         })
-        .then(async(response) => {
+        .then(async(responseData) => {
 
             console.log('AH')
-            console.log(response)
+            console.log(responseData)
 
             axios.get('https://maps.googleapis.com/maps/api/place/photo', {
                 params: {
@@ -43,37 +42,28 @@ api.post('/', async (req, res) => {
                 console.log('BH')
                 console.log(response)
 
-                axios.get('https://maps.googleapis.com/maps/api/geocode/json',{
-                    params:{
-                        address: adress,
-                        key: process.env.GOOGLE_API_KEY
+                const spot = await prisma.spot.create({
+                    data: {
+                        level,
+                        adress: responseData.data.candidates[0].formatted_address,
+                        infos,
+                        lat: responseData.data.candidates[0].geometry.location.lat,
+                        lng: responseData.data.candidates[0].geometry.location.lng,
+                        note: noteUser,
                     }
                 })
-                .then(async(response) => {
-                    
-                    const spot = await prisma.spot.create({
-                        data: {
-                            level,
-                            adress,
-                            infos,
-                            lat: response.data.results[0].geometry.location.lat,
-                            lng: response.data.results[0].geometry.location.lng,
-                            note: noteUser,
-                        }
-                    })
-                    
-                    const post = await prisma.post.create({
-                        data: {
-                            content,
-                            note: noteUser,
-                            spotId: spot.id,
-                            authorId,
-                            userName
-                        }
-                    })
-
-                    res.json({ data: { spot, post } })
+                
+                const post = await prisma.post.create({
+                    data: {
+                        content,
+                        note: noteUser,
+                        spotId: spot.id,
+                        authorId,
+                        userName
+                    }
                 })
+
+                res.json({ data: { spot, post } })
             })
         })
 
