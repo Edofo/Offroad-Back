@@ -27,7 +27,6 @@ api.patch('/:id', async (req, res) => {
             error: "Password and confirmation doesn't match"
             })
         }
-
     
         const user = await prisma.user.findFirst({
             where: {
