@@ -19,14 +19,6 @@ api.post('/', async (req, res) => {
 
         const { level, adress, infos, noteUser, content, authorId, userName } = req.body
 
-        axios.get('https://maps.googleapis.com/maps/api/place/findplacefromtext/json', {
-            params:{
-                address: adress,
-                inputtype: textquery,
-                key: process.env.GOOGLE_API_KEY
-            }
-        })
-        
         axios.get('https://maps.googleapis.com/maps/api/place/findplacefromtext/json',{
             params:{
                 input: adress,
