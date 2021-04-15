@@ -33,7 +33,7 @@ api.post('/', async (req, res) => {
             axios.get('https://maps.googleapis.com/maps/api/place/photo', {
                 params: {
                     photoreference: responseData.data.candidates[0].photos[0].photo_reference,
-                    maxwidth: 400,
+                    maxheight: responseData.data.candidates[0].photos[0].height,
                     key: process.env.GOOGLE_API_KEY
                 }
             })
