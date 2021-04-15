@@ -36,7 +36,7 @@ api.post('/', async (req, res) => {
             })
             .then(async(response) => {
 
-                console.log(response)
+                console.log(response.responseUrl)
 
                 const spot = await prisma.spot.create({
                     data: {
