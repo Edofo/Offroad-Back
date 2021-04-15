@@ -40,8 +40,6 @@ api.patch('/:id', async (req, res) => {
         })
         .then(async(responseData) => {
 
-            console.log(responseData)
-
             axios.get('https://maps.googleapis.com/maps/api/place/photo', {
                 params: {
                     photoreference: responseData.data.candidates[0].photos[0].photo_reference,
