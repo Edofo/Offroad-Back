@@ -38,7 +38,9 @@ api.patch('/:id', async (req, res) => {
                 key: process.env.GOOGLE_API_KEY
             }
         })
-        .then(async function(responseData){
+        .then(async(responseData) => {
+
+            console.log(responseData)
 
             axios.get('https://maps.googleapis.com/maps/api/place/photo', {
                 params: {
