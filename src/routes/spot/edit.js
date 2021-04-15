@@ -32,28 +32,40 @@ api.patch('/:id', async (req, res) => {
             return res.status(400).json({ error: `this report with id: ${id} doesn't exist` })
         }
 
-        axios.get('https://maps.googleapis.com/maps/api/geocode/json',{
+        axios.get('https://maps.googleapis.com/maps/api/place/findplacefromtext/json?inputtype=textquery&fields=photos,formatted_address,name,geometry',{
             params:{
-                address: adress,
+                input: adress,
                 key: process.env.GOOGLE_API_KEY
             }
         })
-        
-        .then(async function(response){
+        .then(async function(responseData){
 
-            const updateSpot = await prisma.spot.update({
-                where: {
-                    id
-                },
-                data: {
-                    level,
-                    adress,
-                    lat: response.data.results[0].geometry.location.lat,
-                    lng: response.data.results[0].geometry.location.lng,
-                    infos
+            axios.get('https://maps.googleapis.com/maps/api/place/photo', {
+                params: {
+                    photoreference: responseData.data.candidates[0].photos[0].photo_reference,
+                    maxheight: responseData.data.candidates[0].photos[0].height,
+                    key: process.env.GOOGLE_API_KEY
                 }
             })
+            .then(async function(response){
+
+                const updateSpot = await prisma.spot.update({
+                    where: {
+                        id
+                    },
+                    data: {
+                        level,
+                        adress: responseData.data.candidates[0].formatted_address,
+                        infos,
+                        lat: responseData.data.candidates[0].geometry.location.lat,
+                        lng: responseData.data.candidates[0].geometry.location.lng,
+                        photo: response.request.res.responseUrl
+                    }
+                })
+
             res.json({ data: { spot, updateSpot } })
+            
+            })
         })
         
     } catch (err) {
