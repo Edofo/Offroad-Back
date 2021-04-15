@@ -37,6 +37,7 @@ model Spot {
   lat         Float
   lng         Float
   infos       String
+  photo      String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   posts       Post[]
@@ -50,7 +51,6 @@ model Post {
   id         Int      @id @default(autoincrement())
   content    String
   note       Float
-  photo      String
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
   spot       Spot?    @relation(fields: [spotId], references: [id])
