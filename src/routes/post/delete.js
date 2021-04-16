@@ -25,7 +25,7 @@ api.delete('/:id', async (req, res) => {
             }
         })
 
-        res.json({ data: { report } })
+        res.json({ data: { post } })
     } catch (err) {
         res.status(400).json({ error: err.message })
     }
