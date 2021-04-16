@@ -11,6 +11,9 @@ api.get('/:id', async (req, res) => {
         const post = await prisma.post.findMany({
             where: {
                 spotId: id
+            },
+            include: {
+                user: true,
             }
         })
 
