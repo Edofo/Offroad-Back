@@ -92,11 +92,14 @@ passport.use(new GoogleStrategy({
             pseudo: profile.name.givenName,
             email: profile.emails[0].value,
             encryptedPassword: '',
-            level: 'Debutant',
+            level: 'DEBUTANT',
             notif: false,
             sang: '',
             allergie: '',
             medicament: '',
+            taille: '',
+            poids: '',
+            tel: '07 00 00 01 11',
             other: '',
             googleId: profile.id
           }
