@@ -12,9 +12,6 @@ api.get('/:id', async (req, res) => {
             where: {
                 spotId: id
             },
-            include: {
-                user: true,
-            }
         })
 
         res.json({ data: { post } })
