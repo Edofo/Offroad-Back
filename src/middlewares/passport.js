@@ -105,7 +105,7 @@ passport.use(new GoogleStrategy({
           }
         })
 
-        next(null, profile);
+        next(null, profile, accessToken);
 
       } else {
 
