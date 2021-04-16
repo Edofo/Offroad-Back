@@ -1,6 +1,5 @@
 import { Router } from 'express'
 import passport from 'passport'
-import good from './good'
 
 const api = Router()
 
@@ -11,7 +10,7 @@ api.get('/', passport.authenticate('google', { scope: ['profile', 'email'] }));
 api.get('/callback', passport.authenticate('google', { failureRedirect: 'failed' }),
   function(req, res) {
     // Successful authentication, redirect home.
-    res.json(req)
+    res.redirect('good')
   }
 );
 
