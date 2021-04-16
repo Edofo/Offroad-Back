@@ -30,9 +30,9 @@ api.post('/', async (req, res) => {
             return t.join(' ');
         }
 
-        const vMoyen = await Math.floor((distance / temps) * 3.6) + ' km';
+        const vMoyen = await Math.floor((distance / temps) * 3.6) + ' km/h';
         const time = await dateHMS(temps)
-        const longueur = await distance + ' km/h';
+        const longueur = await distance + ' km';
         const max = await Math.floor(convertSpeed(speed, 'kmh')) + ' km/h';
     
         const historique = await prisma.historique.create({
