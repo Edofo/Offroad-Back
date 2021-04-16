@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import all from './all'
-import unique from './unique'
+import unique from './allunique'
 import add from './create'
 import del from './delete'
 
